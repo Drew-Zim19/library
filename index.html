@@ -5,18 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Library</title>
     <link rel="stylesheet" href="styles.css"/>
+    <script src="app.js" defer></script>
 </head>
 <body>
     <div class="header">
     <h1>Simple Button Library</h1>
     <h5>Local Storage. By Drew Zimmerman</h5>
-    <button class="addBookButton">Add a Book</button>
+    <button id="addBookButton">Add a Book</button>
     </div>
     <div class="libraryBar">
         <p>Title</p>
         <p>Author</p>
         <p>Pages</p>
-        <p>Read?</p>
+        <p>Read? (y/n)</p>
+    </div>
+    <div class="modal">
+        <div class="modalContents">
+            <form id="bookinputForm">
+                <label for="bookTitle">What is the Book Title?:</label><br>
+                <input for="bookTitle" name="bookTitle" type="text"/><br>
+                <label for="bookAuthor">Who is the Author?:</label><br>
+                <input for="bookAuthor" name="bookAuthor" type="text"/><br>
+                <label for="bookPages">Number of Pages:</label><br>
+                <input for="bookPages" name="bookPages" type="text"><br>
+                <label for="bookRead">Have you read it?</label><br>
+                <input for="bookRead" name="bookRead" value="Yes" type="radio" id="yes"/><label for="bookRead">Yes</label><br>
+                <input for="bookRead" name="bookRead" value="No" type="radio" id="no"/><label for="bookRead">No</label><br>
+                <button class="submit" type="submit">Submit</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>
