@@ -1,0 +1,19 @@
+body{
+    background-color: #A4907C;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;;
+}
+.libraryBar{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #D0F5BE;
+    margin-left: 2vw;
+    margin-right: 2vw;
+}
