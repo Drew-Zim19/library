@@ -5,6 +5,24 @@ let pages = 0;
 let read = false;
 const body = document.getElementById('body');
 
+const modal = document.querySelector(".modal");
+const trigger = document.querySelector(".addBookButton");
+const closeButton = document.querySelector(".close-button");
+
+function toggleModal() {
+    modal.classList.toggle("show-modal");
+}
+
+function windowOnClick(event) {
+    if (event.target === modal) {
+        toggleModal();
+    }
+}
+
+trigger.addEventListener("click", toggleModal);
+closeButton.addEventListener("click", toggleModal);
+window.addEventListener("click", windowOnClick);
+
 function Book(title, author, pages, read) {
   // the book constructor...
   this.title = title;
@@ -16,10 +34,10 @@ function Book(title, author, pages, read) {
 
 
 let addBookButton = document.getElementById('addBookButton');
-addBookButton.addEventListener("click", () => {
+// addBookButton.addEventListener("click", () => {
     
     
-});
+// });
 
 function addBookToLibrary() {
   // do stuff here
