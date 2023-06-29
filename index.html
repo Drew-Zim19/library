@@ -15,17 +15,17 @@
     <div class="modal">
     <div class="modalContents">
         <span class="close-button">&times;</span>
-        <form id="bookinputForm">
+        <form id="bookInputForm" onsubmit="collectInput(event)">
             <label for="bookTitle">What is the Book Title?:</label><br>
-            <input for="bookTitle" name="bookTitle" type="text"/><br>
+            <input required for="bookTitle" id="title"name="bookTitle" type="text" /><br>
             <label for="bookAuthor">Who is the Author?:</label><br>
-            <input for="bookAuthor" name="bookAuthor" type="text"/><br>
+            <input required for="bookAuthor" id="author"name="bookAuthor" type="text" /><br>
             <label for="bookPages">Number of Pages:</label><br>
-            <input for="bookPages" name="bookPages" type="text"><br>
+            <input required for="bookPages" id="numPages"name="bookPages" type="number" min="1" /><br>
             <label for="bookRead">Have you read it?</label><br>
-            <input for="bookRead" name="bookRead" value="Yes" type="radio" id="yes"/><label for="bookRead">Yes</label><br>
-            <input for="bookRead" name="bookRead" value="No" type="radio" id="no"/><label for="bookRead">No</label><br>
-            <button class="submit" type="submit">Submit</button>
+            <input required for="bookRead" name="bookRead" value="Yes" type="radio" id="yes" /><label for="bookRead">Yes</label><br>
+            <input required for="bookRead" name="bookRead" value="No" type="radio" id="no" /><label for="bookRead">No</label><br>
+            <button type="submit" class="submit">Submit</button>
         </form>
     </div>
     </div>
@@ -37,8 +37,6 @@
         <p>Pages</p>
         <p>Read? (y/n)</p>
     </div>
-    <div class="modal">
-       
-    </div>
+   
 </body>
 </html>
