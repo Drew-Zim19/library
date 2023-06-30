@@ -11,12 +11,10 @@ body{
     margin-bottom: 30px;;
 }
 .libraryBar{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
     background-color: #D0F5BE;
-    align-self: center;
-    margin-left: 2vw;
-    margin-right: 2vw;
-    min-width: 50px;
+   
 }
 .addBookButton{
     background-color: #FBFFDC;
@@ -28,17 +26,18 @@ body{
     font-size: large;
     border-style: solid;
 }
-.title, .author, .pages, .read, .changeReadStatus{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    flex-grow: 1;
+span{
+    min-width: 150px;
+    text-align: left;
+    margin-left: 15px;
 }
-
-.libraryBar > p {
-    text-align: center;
-    flex-grow: 1;
-    width: 1fr;
+.title{
+}
+.delete{
+    align-self: center;
+}
+.libraryBar > p{
+    text-align: left;
 }
 .modal {
     position: fixed;
@@ -109,6 +108,7 @@ input[type=text], input[type="number"]{
     border-color: #A4907C;
     font-weight: bold;
     border-style: solid;
+    margin-left: 15px;
 }
 
 .submit:hover {

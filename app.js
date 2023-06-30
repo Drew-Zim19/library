@@ -4,8 +4,10 @@ let author = '';
 let pages = 0;
 let read = '';
 let readStatusButtonCounterArray = [];
-let readStatusArrayCounter = 0;
+let bookCount = 0;
+let buttonCounter = 0;
 const body = document.getElementById('body');
+let deleteStatusIdCounter = 0;
 //establish DOM variables
 const modal = document.querySelector(".modal");
 const addBooktrigger = document.querySelector(".addBookButton");
@@ -73,48 +75,81 @@ function addBookToLibrary() {
 //function which displays the last book in the library array
 //grabs the span parent element and inserts the book object into the span as text
 function displayBook(myLibrary) {
-   let lastBook = myLibrary.length - 1;
-  
+    let lastBook = myLibrary.length - 1;
+    const newBar = document.createElement('div');
+    newBar.classList.add("libraryBar")
+    
     const titleSpan = document.querySelector('.title');
     const authorSpan = document.querySelector('.author');
     const pagesSpan = document.querySelector('.pages');
     const readSpan = document.querySelector('.read');
     const changeReadSpan = document.querySelector('.changeReadStatus');
+    const changeDeleteSpan = document.querySelector('.delete');
 
-
-    const p1 = document.createElement("p");
+    const p1 = document.createElement("span");
     p1.textContent = myLibrary[lastBook].title;
-    titleSpan.appendChild(p1);
-    const p2 = document.createElement("p");
+    p1.classList.add("title");
+    newBar.appendChild(p1);
+    const p2 = document.createElement("span");
     p2.textContent = myLibrary[lastBook].author;
-    authorSpan.appendChild(p2);
-    const p3 = document.createElement("p");
+    p2.classList.add("author");
+    newBar.appendChild(p2);
+    const p3 = document.createElement("span");
     p3.textContent = myLibrary[lastBook].pages;
-    pagesSpan.appendChild(p3);
-    const p4 = document.createElement("p");
+    p3.classList.add("pages");
+    newBar.appendChild(p3);
+    const p4 = document.createElement("span");
     p4.textContent = myLibrary[lastBook].read;
-    readSpan.appendChild(p4);
+    p4.setAttribute("id", buttonCounter + 20000);
+    p4.classList.add("read");
+    newBar.appendChild(p4);
 
     var p5 = document.createElement("button");
     p5.textContent = "Change Read Status";
     p5.classList.add("readButton");
-    p5.setAttribute("id", readStatusArrayCounter);
+    p5.setAttribute("id", buttonCounter);
     p5.setAttribute("onclick", "toggleReadStatus(event)")
-    changeReadSpan.appendChild(p5);
-    readStatusArrayCounter++;
+    p5.classList.add("changeReadStaus");
+    newBar.appendChild(p5);
 
+    var p6 = document.createElement("button");
+    p6.textContent = "Delete";
+    p6.classList.add("readButton");
+    p6.setAttribute("id", myLibrary.length + 10000);
+    p6.setAttribute("onclick", "deleteBook(event)")
+    p6.classList.add("delete");
+    newBar.appendChild(p6);
+    newBar.setAttribute("id", 100000 + bookCount);
+    document.body.appendChild(newBar);
+    buttonCounter++
+    bookCount++;
+}
+//function to delete books. Checks for parent of delete button 
+//then removes the div and resets the library to 0 if it was the last
+//book eliminated
+function deleteBook(event){
+  let domId = event.target.parentElement;
+  domId.remove();
+  var total = document.getElementsByClassName("libraryBar").length;
+  if(total === 1){
+    myLibrary.length = 0;
+    buttonCounter = 0;
+    bookCount = 0;
+  }
 }
 
+//function which toggles the read status on a given book 
 function toggleReadStatus(event){
-    let domId = event.target.getAttribute('id');
+  var newNode = event.target.getAttribute('id');
+  let domId = Number(newNode);
     if(myLibrary[domId].read == 'Yes'){
-      myLibrary[domId].read = 'No'
+      myLibrary[domId].read = 'No';
     }
     else{
-      myLibrary[domId].read = 'Yes'
+      myLibrary[domId].read = 'Yes';
     }
-    domId++;
-    var element = document.getElementById("readHeader").children[domId];
-    var newNode = myLibrary[domId - 1].read;
-    element.innerHTML = newNode;
+    domId = domId + 20000;
+    var element = document.getElementById(domId);
+    element.textContent = myLibrary[newNode].read;
   }
+
