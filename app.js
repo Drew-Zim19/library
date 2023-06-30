@@ -2,7 +2,7 @@ let myLibrary = [];
 let title = '';
 let author = '';
 let pages = 0;
-let read = false;
+let read = '';
 const body = document.getElementById('body');
 //establish DOM variables
 const modal = document.querySelector(".modal");
@@ -28,7 +28,7 @@ function collectInput(event){
   title = document.getElementById("title").value;
   author = document.getElementById("author").value;
   pages = document.getElementById("numPages").value;
-  read = document.querySelector('input[name="bookRead"]').value;
+  read = document.querySelector('input[name="bookRead"]:checked').value;
   addBookToLibrary();
   toggleModal();
   form = document.getElementById("bookInputForm");
@@ -66,26 +66,53 @@ function addBookToLibrary() {
 }
 
 //function which displays the last book in the library array
+//grabs the span parent element and inserts the book object into the span as text
 function displayBook(myLibrary) {
    let lastBook = myLibrary.length - 1;
   
-    const bookBar = document.createElement('div');
-    bookBar.classList.add("libraryBar");
-    const fragment = document.createDocumentFragment();
+    const titleSpan = document.querySelector('.title');
+    const authorSpan = document.querySelector('.author');
+    const pagesSpan = document.querySelector('.pages');
+    const readSpan = document.querySelector('.read');
+    const changeReadSpan = document.querySelector('.changeReadStatus');
+    // titleSpan.classList.add(".title");
+    //const fragment = document.createDocumentFragment();
+
     const p1 = document.createElement("p");
-    const p2 = document.createElement("p");
-    const p3 = document.createElement("p");
-    const p4 = document.createElement("p");
     p1.textContent = myLibrary[lastBook].title;
+    titleSpan.appendChild(p1);
+    const p2 = document.createElement("p");
     p2.textContent = myLibrary[lastBook].author;
+    authorSpan.appendChild(p2);
+    const p3 = document.createElement("p");
     p3.textContent = myLibrary[lastBook].pages;
+    pagesSpan.appendChild(p3);
+    const p4 = document.createElement("p");
     p4.textContent = myLibrary[lastBook].read;
-    fragment.appendChild(p1);
-    fragment.appendChild(p2);
-    fragment.appendChild(p3);
-    fragment.appendChild(p4);
-    bookBar.appendChild(fragment);
-    document.body.appendChild(bookBar);
+    readSpan.appendChild(p4);
+    const p5 = document.createElement("button");
+    p5.textContent = "Change Read Status";
+    p5.classList.add("readButton");
+    changeReadSpan.appendChild(p5);
+    //document.body.appendChild(titleSpan);
+    // const p2 = document.createElement("p");
+    // const p3 = document.createElement("p");
+    // const p4 = document.createElement("p");
+    // const readButton = document.createElement("button");
+    // readButton.classList.add("readButton");
+    // readButton.innerHTML = 'Change Read Status';
+
+    // p1.textContent = myLibrary[lastBook].title;
+    // p2.textContent = myLibrary[lastBook].author;
+    // p3.textContent = myLibrary[lastBook].pages;
+    // p4.textContent = myLibrary[lastBook].read;
+    // fragment.appendChild(p1);
+    // fragment.appendChild(p2);
+    // fragment.appendChild(p3);
+    // fragment.appendChild(p4);
+    // fragment.appendChild(readButton);
+    // bookBar.appendChild(fragment);
+    // document.body.appendChild(bookBar);
 
 }
 

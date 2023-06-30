@@ -12,11 +12,33 @@ body{
 }
 .libraryBar{
     display: flex;
-    justify-content: space-evenly;
     background-color: #D0F5BE;
+    align-self: center;
     margin-left: 2vw;
     margin-right: 2vw;
     min-width: 50px;
+}
+.addBookButton{
+    background-color: #FBFFDC;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: black;
+    font-weight: bold;
+    padding: 8px;
+    font-size: large;
+    border-style: solid;
+}
+.title, .author, .pages, .read, .changeReadStatus{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.libraryBar > p {
+    text-align: center;
+    flex-grow: 1;
+    width: 1fr;
 }
 .modal {
     position: fixed;
@@ -65,7 +87,7 @@ body{
 label, input{
     margin: 5px;
 }
-input[type=text], input[type="number"]
+input[type=text], input[type="number"]{
     border-width: 1px;
     border-style: solid;
 }
@@ -76,6 +98,17 @@ input[type=text], input[type="number"]
     cursor: pointer;
     border-radius: 0.25rem;
     background-color: lightgray;
+}
+.readButton{
+    height: 50px;
+    max-width: 150px;
+    align-self: center;
+    background-color: #FBFFDC;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: #A4907C;
+    font-weight: bold;
+    border-style: solid;
 }
 
 .submit:hover {
