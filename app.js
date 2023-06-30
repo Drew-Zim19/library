@@ -3,6 +3,8 @@ let title = '';
 let author = '';
 let pages = 0;
 let read = '';
+let readStatusButtonCounterArray = [];
+let readStatusArrayCounter = 0;
 const body = document.getElementById('body');
 //establish DOM variables
 const modal = document.querySelector(".modal");
@@ -10,8 +12,9 @@ const addBooktrigger = document.querySelector(".addBookButton");
 const closeButton = document.querySelector(".close-button");
 const submitButton = document.querySelector(".submit");
 //function which toggles modal on and off
-function toggleModal() {
+function toggleModal(event) {
     modal.classList.toggle("show-modal");
+    
 }
 //function which allows user to click outside modal to shut it
 function windowOnClick(event) {
@@ -25,6 +28,7 @@ function windowOnClick(event) {
 
 function collectInput(event){
   event.preventDefault()
+  event.stopPropagation();
   title = document.getElementById("title").value;
   author = document.getElementById("author").value;
   pages = document.getElementById("numPages").value;
@@ -39,7 +43,7 @@ function collectInput(event){
 addBooktrigger.addEventListener("click", toggleModal);
 closeButton.addEventListener("click", toggleModal);
 window.addEventListener("click", windowOnClick);
-//submitButton.addEventListener("click", collectInput);
+
 
 //check number of pages input for validity
 const input = document.getElementById('numPages');
@@ -56,7 +60,8 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
-
+//creates a new book by sending data to constructor
+//adds book to array and sends array to display book function
 
 function addBookToLibrary() {
   // do stuff here
@@ -75,8 +80,7 @@ function displayBook(myLibrary) {
     const pagesSpan = document.querySelector('.pages');
     const readSpan = document.querySelector('.read');
     const changeReadSpan = document.querySelector('.changeReadStatus');
-    // titleSpan.classList.add(".title");
-    //const fragment = document.createDocumentFragment();
+
 
     const p1 = document.createElement("p");
     p1.textContent = myLibrary[lastBook].title;
@@ -90,33 +94,27 @@ function displayBook(myLibrary) {
     const p4 = document.createElement("p");
     p4.textContent = myLibrary[lastBook].read;
     readSpan.appendChild(p4);
-    const p5 = document.createElement("button");
+
+    var p5 = document.createElement("button");
     p5.textContent = "Change Read Status";
     p5.classList.add("readButton");
+    p5.setAttribute("id", readStatusArrayCounter);
+    p5.setAttribute("onclick", "toggleReadStatus(event)")
     changeReadSpan.appendChild(p5);
-    //document.body.appendChild(titleSpan);
-    // const p2 = document.createElement("p");
-    // const p3 = document.createElement("p");
-    // const p4 = document.createElement("p");
-    // const readButton = document.createElement("button");
-    // readButton.classList.add("readButton");
-    // readButton.innerHTML = 'Change Read Status';
-
-    // p1.textContent = myLibrary[lastBook].title;
-    // p2.textContent = myLibrary[lastBook].author;
-    // p3.textContent = myLibrary[lastBook].pages;
-    // p4.textContent = myLibrary[lastBook].read;
-    // fragment.appendChild(p1);
-    // fragment.appendChild(p2);
-    // fragment.appendChild(p3);
-    // fragment.appendChild(p4);
-    // fragment.appendChild(readButton);
-    // bookBar.appendChild(fragment);
-    // document.body.appendChild(bookBar);
+    readStatusArrayCounter++;
 
 }
 
-
-
-
-
+function toggleReadStatus(event){
+    let domId = event.target.getAttribute('id');
+    if(myLibrary[domId].read == 'Yes'){
+      myLibrary[domId].read = 'No'
+    }
+    else{
+      myLibrary[domId].read = 'Yes'
+    }
+    domId++;
+    var element = document.getElementById("readHeader").children[domId];
+    var newNode = myLibrary[domId - 1].read;
+    element.innerHTML = newNode;
+  }
